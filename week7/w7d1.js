@@ -1,4 +1,5 @@
-function bubbleSort(arr) {
+
+const bubbleSort = (arr) => {
     for(let i=0; i<arr.length; i++) {
         let inOrder = true;
         for(let j=0; j<arr.length-i-1; j++) {
@@ -13,5 +14,6 @@ function bubbleSort(arr) {
     }
     return arr;
 }
+
 
 console.log(bubbleSort([1,2,3,4,5]));
