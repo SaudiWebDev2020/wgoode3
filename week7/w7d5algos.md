@@ -1,5 +1,22 @@
 # November 26th Algorithms
 
+## Extract Digit
+
+As part of our Radix sort, we will need to be able to extract the digit from a number at a certain place, write the function `extractDigit` that will be given a number and a power of ten and will return the value at that place...
+
+```js
+function extractDigit(number, power) {
+  let result = 0;
+  // your code here
+  return result;
+}
+
+console.log(extractDigig(123, 0); // should return 3
+console.log(extractDigig(123, 1); // should return 2
+console.log(extractDigig(123, 2); // should return 1
+console.log(extractDigig(123, 3); // should return 0
+```
+
 ## Radix Sort
 
 Write a function called `radixSort` that takes an array and sorts it by starting at the digits in the 1s place and putting each element into a corresponding "bucket" 0-9.
@@ -30,20 +47,3 @@ let buckets = [ [3, 9, 12, 15, 20], [121], [], [], [], [], [], [], [], [] ];
 ```
 
 And continue this process until we reach the highest power of 10 present
-
-### Extract Digit
-
-As part of our Radix sort, we will need to be able to extract the digit from a number at a certain place, write the function `extractDigit` thatcan be given a number and a power of ten that will return the value at that place...
-
-```js
-function extractDigit(number, power) {
-  let result = 0;
-  // your code here
-  return result;
-}
-
-console.log(extractDigig(123, 0); // should return 3
-console.log(extractDigig(123, 1); // should return 2
-console.log(extractDigig(123, 2); // should return 1
-console.log(extractDigig(123, 3); // should return 0
-```
