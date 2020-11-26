@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-
+import HeroCard from './HeroCard';
 
 const HeroForm = props => {
 
@@ -9,6 +9,7 @@ const HeroForm = props => {
   const [level, setLevel] = useState("Beginner");
   const [skills, setSkills] = useState("");
   const [errors, setErrors] = useState({}); 
+
 
   const beAHero = e => {
     e.preventDefault();
@@ -43,6 +44,7 @@ const HeroForm = props => {
   }
 
   return (
+    <>
     <form onSubmit={beAHero}>
       <div className="form-group">
         <label>Name:</label>
@@ -73,6 +75,8 @@ const HeroForm = props => {
         <input type="submit" value="Register Hero" className="btn btn-primary btn-block" disabled />
       }
     </form>
+    <HeroCard hero={{name, secret, level, skills: skills.split(",")}} />
+    </>
   );
 
 }

@@ -1,12 +1,22 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import HeroForm from './Components/HeroForm';
 import HeroCard from './Components/HeroCard';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 
 function App() {
 
-  const [hero, setHero] = useState({skills: []});
+  const [heroes, setHeroes] = useState([]);
+
+  // function that runs as soon as the component loads!
+  useEffect( () => {
+    console.log("the page has loaded");
+    console.log(localStorage.getItem("name"));
+  }, []);
+
+  const createHero = newHero => {
+    setHeroes([...heroes, newHero]);
+  }
 
   return (
     <div className="container">
@@ -15,10 +25,14 @@ function App() {
       </div>
       <div className="row">
         <div className="col">
-          <HeroForm setHero={setHero} />
+          <HeroForm setHero={createHero} />
         </div>
         <div className="col">
-          <HeroCard hero={hero} />
+          {
+            heroes.map((hero, i) =>
+              <HeroCard key={i} hero={hero} /> 
+            )
+          }
         </div>
       </div>
     </div>
