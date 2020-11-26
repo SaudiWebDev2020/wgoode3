@@ -30,3 +30,7 @@ Create a game that displays a randomized group of questions and allows the user 
 * BONUS 3: Organize the questions by category.
 * BONUS 4: Organize the questions by difficulty.
 * BONUS 5: Create the UI with the questions hidden until selected.
+
+## Wildcard
+
+Make a project that you find interesting! You can use whatever language or framework you like just be creative!
