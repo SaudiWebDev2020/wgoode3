@@ -15,7 +15,7 @@ We then continue for the 10 place digit
 
 ```js
 // example array [121, 20, 12, 3, 15, 9]
-// looking at the 1s place
+// looking at the 10s place
 let buckets = [ [3, 9], [12, 15], [121, 20], [], [], [], [], [], [], [] ];
 // the array then becomes [3, 9, 12, 15, 121, 20]
 ```
@@ -24,7 +24,7 @@ And for the 100s digit
 
 ```js
 // example array [3, 9, 12, 15, 121, 20]
-// looking at the 1s place
+// looking at the 100s place
 let buckets = [ [3, 9, 12, 15, 20], [121], [], [], [], [], [], [], [], [] ];
 // the array then becomes [3, 9, 12, 15, 20, 121]
 ```
