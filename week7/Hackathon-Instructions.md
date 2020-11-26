@@ -4,6 +4,8 @@
 
 Create a virtual pet, a Dojodachi! Dojodachis have happiness, fullness, and energy that we need to max out. You can feed, play with, work, or sleep to manage these values. if you can get your Dojodachi's fullness, happiness, and energy above 100, you win! But if fullness or happiness falls to zero, your Dojodachi will die :(
 
+<img src="https://raw.githubusercontent.com/SaudiWebDev2020/will_goode/main/week7/assets/Dojodachi-Wireframe.png" alt="dojodachi />
+
 * Your Dojodachi should start with 20 happiness, 20 fullness, 50 energy, and 3 meals.
 * After every button press, display a message showing how the Dojodachi reacted
 * Feeding your Dojodachi costs 1 meal and gains a random amount of fullness between 5 and 10 (you cannot feed your Dojodachi if you do not have meals)
@@ -19,6 +21,8 @@ Or create whatever custom rules you want for your dojodachi!
 ## Trivia Game
 
 Create a game that displays a randomized group of questions and allows the user to pick from several of answers. In the end show the user their score.
+
+<img src="https://raw.githubusercontent.com/SaudiWebDev2020/will_goode/main/week7/assets/triviaMEAN418.png" alt="trivia game" />
 
 * Required: Display the questions and the possible answers.
 * BONUS 1: Reveal the correct answer when the user clicks a button.
