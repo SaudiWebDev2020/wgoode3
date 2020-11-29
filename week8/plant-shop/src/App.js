@@ -9,10 +9,12 @@ function App() {
 
   const buy = index => {
     console.log("this is the plant to buy", index, plants[index]);
-    // the spluce way
+    // the splice way
     // let temp = [...plants];
     // temp.splice(index, 1);
     // setPlants(temp);
+
+    // the slice way
     setPlants( plants.slice(0, index).concat(plants.slice(index+1, plants.length)) );
   }
 
