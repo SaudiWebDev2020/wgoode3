@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+function getRandomAnime() {
+  const titles = ["Boku no Hero Academia", "Cowboy Bebop", "Katanagatari", "FLCL", "Demon Slayer", "Fate/Zero", "Detective Conan", "Sailor Moon", "Monster", "Legend of Galactic Heroes", "Lucky☆Star", "Jojo's Bizarre Adventure", "Pretty Cure"];
+  return titles[Math.floor(Math.random() * titles.length)];
+}
 
 const Search = props => {
 
@@ -8,14 +12,14 @@ const Search = props => {
   const [results, setResults] = useState([]);
 
   useEffect(() => {
-    console.log("The query is being changed", q);
+    // console.log("The query is being changed", q);
     if(q.length > 2) {
       axios.get(`https://api.jikan.moe/v3/search/anime?q=${q}`)
         .then(res => {
           console.log(res);
           setResults(res.data.results);
         }).catch(err => console.error(err));
-        console.log("SEARCHING!!!")
+      // console.log("SEARCHING!!!")
     } else {
       setResults([]);
     }
@@ -30,22 +34,35 @@ const Search = props => {
     setResults([]);
   }
 
+  const select = anime => {
+    props.onSearch(anime);
+    setQ("");
+    setResults([]);
+  }
+
   return (
     <>
     <form onSubmit={search}>
-      <div className="form-group">
-        <label>Search</label>
-        <input type="search" className="form-control" placeholder="Search" onChange={e => setQ(e.target.value)} value={q} />
+      <div className="input-group mb-3">
+        <div className="input-group-prepend">
+          <span className="input-group-text">Search for an anime like...</span>
+        </div>
+        <input type="search" className="form-control" placeholder={getRandomAnime()} onChange={e => setQ(e.target.value)} value={q} />
+        <div className="input-group-prepend">
+          <input type="submit" value="GO!" className="btn btn-primary" />
+        </div>
       </div>
-      <input type="submit" value="GO!" className="btn btn-outline-dark" />
     </form>
-    <ul className="list-group">
-      {
-        results.slice(0, 5).map(anime =>
-          <li key={anime.mal_id} className="list-group-item">{anime.title}</li>
-        )
-      }
-    </ul>
+    <div className="card">
+      <ul className="list-group list-group-flush">
+        {results.slice(0, 5).map(anime =>
+          <li key={anime.mal_id} className="list-group-item" onClick={e => select(anime)}>
+            {anime.title}
+            <button className="btn btn-sm btn-outline-secondary float-right">View</button>
+          </li>
+        )}
+      </ul>
+    </div>
     </>
   );
 
