@@ -13,4 +13,6 @@ function dedupe(str) {
 
 console.log(dedupe("Snap, crackle and pop!"));
 // should return something like "Snap, crkledo!"
+console.log(dedupe("hello world"));
+// should return something like "helo wrd"
 ```
