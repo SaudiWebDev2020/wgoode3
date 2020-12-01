@@ -22,25 +22,35 @@ const WishListTable = (props) => {
 
   console.log(props);
 
+  const buy = (productToBuy) => {
+    props.removeProduct(productToBuy)
+  }
+
+  const discount = (product) => {
+    // apply a 20% "discount"
+    product.price = (parseFloat(product.price) * 0.8).toFixed(2);
+    props.editProduct(product);
+  } 
+
   return (
     <table className="table table-striped">
       <tbody>
         <tr className="bg-dark text-light">
           <th>Actions</th>
           <th>Product Name</th>
-          <th>Product Price</th>
+          <th onClick={e => props.sort()}>Product Price ▾</th>
         </tr>
         {/* {
           createRows(props.products)
         } */}
-        {props.products.map( product => 
-          <tr key={product.id}>
+        {props.products.map( (product, i) => 
+          <tr key={i}>
             <td>
-              <button className="btn btn-outline-danger btn-sm">Buy!</button>
-              <button className="btn btn-outline-info btn-sm">Edit</button>
+              <button className="btn btn-outline-danger btn-sm" onClick={ e => buy(product) }>Buy!</button>
+              <button className="btn btn-outline-info btn-sm" onClick={ e => discount(product) }>Apply Coupon</button>
             </td>
             <td>{product.name}</td>
-            <td>{product.price}</td>
+            <td>${product.price}</td>
           </tr>
         )}
       </tbody>

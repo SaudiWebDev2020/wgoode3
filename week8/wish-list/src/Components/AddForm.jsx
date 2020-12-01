@@ -8,8 +8,10 @@ const AddForm = (props) => {
 
   const insertProduct = e => {
     e.preventDefault();
-    const newProduct = {name, price};
+    const newProduct = {name, price: parseFloat(price).toFixed(2)};
     props.addProduct(newProduct);
+    setName("");
+    setPrice(0);
   }
 
   return (
@@ -26,7 +28,7 @@ const AddForm = (props) => {
             <div className="col-sm-5">
               <div className="form-group">
                 <label>Product Price</label>
-                <input type="number" name="price" step="0.01" className="form-control" onChange={e => setPrice(e.target.value)} value={price} />
+                <input type="number" name="price" step="0.01" min="0" className="form-control" onChange={e => setPrice(e.target.value)} value={price} />
               </div>
             </div>
             <div className="col-sm-2 align-bottom">
