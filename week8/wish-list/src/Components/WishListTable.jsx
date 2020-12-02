@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from '@reach/router';
 
 
 // function createRows(products) {
@@ -48,6 +49,7 @@ const WishListTable = (props) => {
             <td>
               <button className="btn btn-outline-danger btn-sm" onClick={ e => buy(product) }>Buy!</button>
               <button className="btn btn-outline-info btn-sm" onClick={ e => discount(product) }>Apply Coupon</button>
+              <Link to={"/product/" + product.id} className="btn btn-sm btn-outline-success">View</Link>
             </td>
             <td>{product.name}</td>
             <td>${product.price}</td>

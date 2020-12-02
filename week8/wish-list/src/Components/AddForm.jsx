@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { navigate } from '@reach/router';
 
 
 const AddForm = (props) => {
@@ -8,39 +9,37 @@ const AddForm = (props) => {
 
   const insertProduct = e => {
     e.preventDefault();
-    const newProduct = {name, price: parseFloat(price).toFixed(2)};
+    const newProduct = { name, price: parseFloat(price).toFixed(2) };
     props.addProduct(newProduct);
-    setName("");
-    setPrice(0);
+    // setName("");
+    // setPrice(0);
+    navigate("/");
   }
 
   return (
-    <div className="card">
-      <div className="card-body">
-        <form onSubmit={insertProduct}>
-          <div className="row">
-            <div className="col-sm-5">
-              <div className="form-group">
-                <label>Product Name</label>
-                <input type="text" name="name" className="form-control" onChange={e => setName(e.target.value)} value={name} />
-              </div>
-            </div>
-            <div className="col-sm-5">
-              <div className="form-group">
-                <label>Product Price</label>
-                <input type="number" name="price" step="0.01" min="0" className="form-control" onChange={e => setPrice(e.target.value)} value={price} />
-              </div>
-            </div>
-            <div className="col-sm-2 align-bottom">
-              <div className="form-group">
-                <label>&nbsp;</label>
-                <input type="submit" value="Add" className="btn btn-success btn-block" />
-              </div>
-            </div>
+
+    <form onSubmit={insertProduct}>
+      <div className="row">
+        <div className="col-sm-5">
+          <div className="form-group">
+            <label>Product Name</label>
+            <input type="text" name="name" className="form-control" onChange={e => setName(e.target.value)} value={name} />
           </div>
-        </form>
+        </div>
+        <div className="col-sm-5">
+          <div className="form-group">
+            <label>Product Price</label>
+            <input type="number" name="price" step="0.01" min="0" className="form-control" onChange={e => setPrice(e.target.value)} value={price} />
+          </div>
+        </div>
+        <div className="col-sm-2 align-bottom">
+          <div className="form-group">
+            <label>&nbsp;</label>
+            <input type="submit" value="Add" className="btn btn-success btn-block" />
+          </div>
+        </div>
       </div>
-    </div>
+    </form>
   );
 
 }
