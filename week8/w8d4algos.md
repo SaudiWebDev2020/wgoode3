@@ -13,6 +13,7 @@ function encode(str) {
 
 console.log(encode("aaabccdddd"));
 // should return "a3b1c2d4"
+```
 
 ## String Decode
 
