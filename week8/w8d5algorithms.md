@@ -19,4 +19,4 @@ console.log( allCombinations( words ) );
 // should return ["quick brown fox", "quick brown dog", "quick red fox", "quick red dog", "quick grey fox", "quick grey dog", "lazy brown fox", "lazy brown dog", "lazy red fox", "lazy red dog", "lazy grey fox", "lazy grey dog"]
 ```
 
-*Hint* you may need to consider recursion
+**Hint** you may need to consider recursion
