@@ -12,7 +12,7 @@ function allCombinations(words) {
     }
     helper("", 0);
     return combinations;
-  }
+}
   
   const words = [ ["quick", "lazy"],
                   ["fluffy", "scraggly"],
