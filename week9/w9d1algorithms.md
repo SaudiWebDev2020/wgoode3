@@ -2,7 +2,7 @@
 
 ## Intersect Sorted Arrays
 
-Efficiently combine two sorted arrays into an array containing the sorted multiset intersection of the two. 
+Efficiently combine two sorted arrays into an array containing the sorted multiset intersection of the two. <br>
 Example: given `[1,2,2,2,7]` and `[2,2,6,6,7]`, return `[2,2,7]`.
 
 ```js
@@ -18,7 +18,7 @@ console.log(intersect([1, 2, 2, 2, 7], [2, 2, 6, 6, 7]));
 
 ## Union Sorted Arrays
 
-Efficiently combine two already-sorted arrays into a new sorted array containing the multiset union. 
+Efficiently combine two already-sorted arrays into a new sorted array containing the multiset union. <br>
 Example: given `[1,2,2,2,7]` and `[2,2,6,6,7]`, return `[1,2,2,2,6,6,7]`.
 
 ```js
