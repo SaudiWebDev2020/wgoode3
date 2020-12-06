@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Document
+        link(rel="stylesheet", href="/css/style.css")
+    body
+        h1.title Hello World
+        table
+            tr
+                th Make
+                th Model
+                th Year
+                th Color
+            each car in cars
+                tr
+                    td= car.make
+                    td= car.model
+                    td= car.year
+                    td= car.color
+
+        form(action="/create", method="post")
+            .group
+                label Make
+                input(type="text" name="make")
+            .group
+                label Model
+                input(type="text" name="model")
+            .group
+                label Year
+                input(type="text" name="year")
+            .group    
+                label Color
+                input(type="text" name="color")
+            input(type="submit" value="Add Car")
