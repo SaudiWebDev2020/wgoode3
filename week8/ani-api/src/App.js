@@ -18,8 +18,8 @@ const App = props => {
     if(cachedHistory) {
       try {
         setHistory(JSON.parse(cachedHistory));
-      } catch {
-        console.error("history corrupted?");
+      } catch(err) {
+        console.error("history corrupted... \n", err);
         localStorage.removeItem("history");
       }
     }
