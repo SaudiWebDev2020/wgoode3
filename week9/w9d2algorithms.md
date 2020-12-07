@@ -54,12 +54,14 @@ This rearrangement will look like the following
 
 ```
 // step 1 - 1 is initially inserted at index `3`
+// this.heap [null, 3, 5, 1] 
 
     3
   /   \
 5       1
 
 // step 2 - 1 is less than its parent at index `1` so it will swap places
+// this.heap [null, 1, 5, 3]
 
     1
   /   \
