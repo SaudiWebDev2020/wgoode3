@@ -32,3 +32,35 @@ class MinHeap {
   }
 }
 ```
+
+When we insert a value it should start out by pushing it to the end of the array, then rearranging the array as is needed.
+
+```js
+const heap1 = new MinHeap();
+heap1.insert(3);
+// the heap should look like [null, 3]
+```
+
+If we insert a new value it will start at the end and rearrange itself if it is less than its parent.
+
+```js
+heap1.insert(5);
+heap1.insert(1);
+// the heap should look like [null, 1, 5, 3]
+```
+
+This rearrangement will look like the following
+
+```
+// step 1 - 1 is initially inserted at index `3`
+
+    3
+  /   \
+5       1
+
+// step 2 - 1 is less than its parent at index `1` so it will swap places
+
+    1
+  /   \
+5       3
+```
