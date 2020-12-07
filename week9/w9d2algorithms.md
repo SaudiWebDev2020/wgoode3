@@ -4,7 +4,7 @@
 
 Create a `MinHeap` class that stores data in a nearly complete tree. The `MinHeap` should use an array to store values with index `0` kept empty (it will make the math easier) and the smallest value will be stored in index `1`, effectively the root of the tree.
 
-Each value must be larger or equal to its parent, and the parent index will be *half* of its own index. 
+Each child value must be larger or equal to its parent, and the parent index will be *half* of its own index. 
 
 ```js
 let parentIndex = Math.floor(currentIndex / 2);
