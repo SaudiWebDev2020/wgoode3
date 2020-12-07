@@ -1,4 +1,4 @@
-export default function(arr) {
+export default function dedupe(arr) {
     const newArr = [];
     for(let item of arr) {
         // console.log(item);

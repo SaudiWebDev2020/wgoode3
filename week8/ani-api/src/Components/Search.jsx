@@ -12,14 +12,11 @@ const Search = props => {
   const [results, setResults] = useState([]);
 
   useEffect(() => {
-    // console.log("The query is being changed", q);
     if(q.length > 2) {
       axios.get(`https://api.jikan.moe/v3/search/anime?q=${q}`)
         .then(res => {
-          console.log(res);
           setResults(res.data.results);
         }).catch(err => console.error(err));
-      // console.log("SEARCHING!!!")
     } else {
       setResults([]);
     }

@@ -15,12 +15,30 @@ const App = props => {
   useEffect(() => {
     // on page load check for past saved results
     const cachedHistory = localStorage.getItem("history");
-    console.log(cachedHistory);
+    if(cachedHistory) {
+      try {
+        setHistory(JSON.parse(cachedHistory));
+      } catch {
+        console.error("history corrupted?");
+        localStorage.removeItem("history");
+      }
+    }
   }, []);
+
+  useEffect(() => {
+    // when history is updated let's store it in localhost
+    localStorage.setItem('history', JSON.stringify(history));
+  }, [history]);
 
   const newSearch = anime => {
     setResult(anime);
     setHistory(dedupe([anime, ...history]));
+  }
+
+  const reset = e => {
+    localStorage.removeItem("history");
+    setResult({});
+    setHistory([]);
   }
 
   return (
@@ -32,12 +50,11 @@ const App = props => {
       <div className="row">
         <div className="col-sm-8">
           <h4 className="my-3">Showing results...</h4>
-          {/* { JSON.stringify(result) } */}
           { result.title ? <Anime anime={result} /> : "" }
         </div>
         <div className="col-sm-4">
           <h4 className="my-3">Past Searches</h4>
-          <History history={history} onSearch={newSearch} />
+          <History history={history} onSearch={newSearch} reset={reset} />
         </div>
       </div>
     </div>
