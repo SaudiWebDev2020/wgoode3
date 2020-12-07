@@ -45,6 +45,7 @@ If we insert a new value it will start at the end and rearrange itself if it is 
 
 ```js
 heap1.insert(5);
+// the heap should look like [null, 3, 5]
 heap1.insert(1);
 // the heap should look like [null, 1, 5, 3]
 ```
