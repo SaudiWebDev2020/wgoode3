@@ -20,7 +20,7 @@ const RestaurantSchema = new mongoose.Schema({
     yearEstablished: {
         type: Number,
         required: [true, "Year Established is required"],
-        min: [1000, "Your restaurant is too old!"],
+        min: [1725, "Your restaurant is too old!"],
         max: [new Date().getFullYear() + 1, "Your restaurant doesn't exist yet!"]
     }, 
     reviews: []

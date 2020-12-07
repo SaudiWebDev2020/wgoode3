@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Router, Link } from '@reach/router';
 import AllRestaurants from './Components/AllRestautants';
 import NewRestaurant from './Components/NewRestaurant';
+import EditRestaurant from './Components/EditRestaurant';
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
       <Router>
         <AllRestaurants path="/" />
         <NewRestaurant path="/new" />
+        <EditRestaurant path="/edit/:_id" />
       </Router>
     </div>
   );

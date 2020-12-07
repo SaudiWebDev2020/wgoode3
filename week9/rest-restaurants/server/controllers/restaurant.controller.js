@@ -10,7 +10,10 @@ class RESTaurantController {
     }
 
     getOne(req, res) {
-        // TODO
+        // getting back one restaurant at a time
+        Restaurant.findOne({_id: req.params._id})
+            .then(restaurant => res.json(restaurant))
+            .catch(err => res.json(err));
     }
 
     create(req, res) {
@@ -21,11 +24,15 @@ class RESTaurantController {
     }
 
     update(req, res) {
-        // TODO
+        Restaurant.findByIdAndUpdate({_id: req.params._id}, req.body, {runValidators: true})
+            .then(() => res.json({msg: "ok"}))
+            .catch(err => res.json(err));
     }
 
     remove(req, res) {
-        // TODO
+        Restaurant.deleteOne({_id: req.params._id})
+            .then(() => res.json({msg: "ok"}))
+            .catch(err => res.json(err));
     }
 
 }

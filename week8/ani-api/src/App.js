@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Search from './Components/Search'; 
 import Anime from './Components/Anime';
 import History from './Components/History';
+import Confirm from './Components/Confirm';
 import dedupe from './dedupe';
 import './App.css';
 
@@ -57,6 +58,7 @@ const App = props => {
           <History history={history} onSearch={newSearch} reset={reset} />
         </div>
       </div>
+      {/* <Confirm /> */}
     </div>
   );
 }
