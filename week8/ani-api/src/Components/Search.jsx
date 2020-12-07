@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
-function getRandomAnime() {
-  const titles = ["Boku no Hero Academia", "Cowboy Bebop", "Katanagatari", "FLCL", "Demon Slayer", "Fate/Zero", "Detective Conan", "Sailor Moon", "Monster", "Legend of Galactic Heroes", "Lucky☆Star", "Jojo's Bizarre Adventure", "Pretty Cure"];
-  return titles[Math.floor(Math.random() * titles.length)];
-}
+import getRandomAnime from '../getRandomAnime';
 
 const Search = props => {
 
