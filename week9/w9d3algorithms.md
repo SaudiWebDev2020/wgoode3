@@ -17,7 +17,7 @@ let leftChildIndex = 2*currentIndex;
 let rightChildIndex = 2*currentIndex + 1;
 ```
 
-Write an remove method.
+Write a remove method.
 
 ```js
 class MinHeap {
