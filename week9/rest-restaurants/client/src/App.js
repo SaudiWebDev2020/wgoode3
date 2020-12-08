@@ -5,6 +5,7 @@ import { Router, Link } from '@reach/router';
 import AllRestaurants from './Components/AllRestautants';
 import NewRestaurant from './Components/NewRestaurant';
 import EditRestaurant from './Components/EditRestaurant';
+import OneRestaurant from './Components/OneRestaurant';
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <AllRestaurants path="/" />
         <NewRestaurant path="/new" />
         <EditRestaurant path="/edit/:_id" />
+        <OneRestaurant path="/view/:_id" />
       </Router>
     </div>
   );
