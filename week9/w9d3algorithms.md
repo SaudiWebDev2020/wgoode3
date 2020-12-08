@@ -33,7 +33,7 @@ class MinHeap {
 }
 ```
 
-Remove should always remove the smallest value, and then ensure  smallest remaining value is moved to index `1`. Assuming we have a heap that contains the following values:
+Remove should always remove the smallest value, and then ensure the smallest remaining value is moved to index `1`. Assuming we have a heap that contains the following values:
 
 ```
 // this.heap [null, -1, 3, 4, 8, 5, 6] 
