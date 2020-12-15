@@ -1,0 +1,25 @@
+{
+  "name": "post-bucket",
+  "version": "0.0.1",
+  "description": "Bucket sounds respectable to me!",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo(\"No thank you\")",
+    "start": "nodemon server.js"
+  },
+  "keywords": [
+    "MERN",
+    "Users",
+    "JWT"
+  ],
+  "author": "Me",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.11.8"
+  }
+}
