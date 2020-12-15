@@ -40,6 +40,7 @@ UserSchema.pre('validate', function (next) {
 });
 
 // this runs before the user is saved to the db
+// gotcha this also runs if we update the user
 UserSchema.pre('save', function (next) {
     bcrypt.hash(this.password, 10)
         .then(hash => {
