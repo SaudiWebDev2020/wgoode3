@@ -9,13 +9,15 @@ class UserController {
 
     getOne(req, res) {
         // TODO: return the user if they are logged in
+        console.log(req.method, req.url);
+        console.log(req.cookies.usertoken);
         jwt.verify(req.cookies.usertoken, secret, (err, payload) => {
             console.log(payload);
             if(err) {
                 return res.json({user: null});
             }
             User.findOne({_id: payload._id})
-                .then(user => res.json(user))
+                .then(user => res.json({user}))
                 .catch(err => res.json({user: null}));
         });
     }
@@ -39,7 +41,7 @@ class UserController {
         User.findOne({ email: req.body.email })
             .then(user => {
                 if (user === null) {
-                    res.json({ msg: "invalid login attempt" });
+                    res.json({ msg: "Invalid login attempt" });
                 } else {
                     // don't forget to import bcrypt
                     bcrypt.compare(req.body.password, user.password)
@@ -49,10 +51,10 @@ class UserController {
                                     .cookie("usertoken", jwt.sign({_id: user._id}, secret), {httpOnly: true})
                                     .json({ msg: "massive win", user });
                             } else {
-                                res.json({ msg: "invalid login attempt" });
+                                res.json({ msg: "Invalid login attempt" });
                             }
                         })
-                        .catch(err => res.json({ msg: "invalid login attempt" }));
+                        .catch(err => res.json({ msg: "Invalid login attempt" }));
                 }
             })
             .catch(err => res.json(err));

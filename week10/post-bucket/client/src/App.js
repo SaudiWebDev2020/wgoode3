@@ -1,23 +1,49 @@
-import logo from './logo.svg';
-import './App.css';
+import { navigate, Router, Link } from '@reach/router';
+import React, { useEffect, useState } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Login from './Components/Login';
+import axios from 'axios';
+import Home from './Components/Home';
+import Register from './Components/Register';
 
 function App() {
+
+  const [loggedInUser, setLoggedInUser] = useState(null);
+
+  useEffect( () => {
+    axios.get("http://localhost:8000/api/users/session", {
+      withCredentials: true
+    })
+      .then(res => {
+        setLoggedInUser(res.data.user);
+        if(res.data.user === null) {
+          navigate("/");
+        }
+      }).catch(err => console.error(err));
+  }, []);
+
+  const logout = e => {
+    axios.delete("http://localhost:8000/api/users/session", {
+      withCredentials: true
+    })
+      .then(res => {
+        console.log(res);
+        navigate("/");
+        setLoggedInUser(null);
+      }).catch(err => console.error(err));
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <h1>hello</h1>
+      {loggedInUser ? 
+        <button className="btn btn-outline-danger" onClick={logout}>Sign Out</button> : ""}
+      <Link className="btn btn-outline-dark" to="/home">Home</Link>
+      <Router>
+        <Login path="/" onLogin={user => setLoggedInUser(user)} />
+        <Register path="/user/new" onRegister={user => setLoggedInUser(user)} />
+        <Home path="/home" user={loggedInUser} />
+      </Router>
     </div>
   );
 }
