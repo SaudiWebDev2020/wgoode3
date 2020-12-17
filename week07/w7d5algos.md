@@ -11,10 +11,10 @@ function extractDigit(number, power) {
   return result;
 }
 
-console.log(extractDigig(123, 0); // should return 3
-console.log(extractDigig(123, 1); // should return 2
-console.log(extractDigig(123, 2); // should return 1
-console.log(extractDigig(123, 3); // should return 0
+console.log(extractDigit(123, 0); // should return 3
+console.log(extractDigit(123, 1); // should return 2
+console.log(extractDigit(123, 2); // should return 1
+console.log(extractDigit(123, 3); // should return 0
 ```
 
 ## Radix Sort
