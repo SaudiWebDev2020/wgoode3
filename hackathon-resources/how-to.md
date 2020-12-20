@@ -1,6 +1,6 @@
 # Django REST
 
-<img src="" alt="DjangoREST logo" height="240px" />
+<img src="https://raw.githubusercontent.com/SaudiWebDev2020/will_goode/main/hackathon-resources/assets/logo.png" alt="DjangoREST logo" height="240px" />
 
 ## Why Django REST?
 
