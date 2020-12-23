@@ -53,8 +53,7 @@ class UserSessionViewSet(APIView):
             if user == None:
                 return Response({"errors": "Invalid login attempt", "user": None})
             login(request, user)
-            serializer = UserSerializer(user_from_db)
-            return Response({"message": "ok", "user": serializer.data})
+            return Response({"message": "ok", "user": UserSerializer(user_from_db).data})
         except User.DoesNotExist as error:
             return Response({"errors": "Invalid login attempt", "user": None})
 
