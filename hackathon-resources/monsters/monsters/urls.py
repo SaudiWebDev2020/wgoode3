@@ -16,11 +16,14 @@ Including another URLconf
 
 from django.urls import path, include
 from rest_framework import routers
-from monster_api import views
+from monster_api import views as monster_views
+from user_api import views as user_views
 
 router = routers.DefaultRouter()
-router.register(r'monsters', views.MonsterViewSet)
+router.register(r'monsters', monster_views.MonsterViewSet)
 
 urlpatterns = [
-    path(r'api/', include(router.urls))
+    path(r'api/', include(router.urls)),
+    path(r'api/users', user_views.UserViewSet.as_view()),
+    path(r'api/sessions', user_views.UserSessionViewSet.as_view())
 ]
