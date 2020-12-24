@@ -7,6 +7,7 @@ class Task(models.Model):
     description = models.TextField(max_length=1000)
     is_complete = models.BooleanField(default=False)
     due_date = models.DateField()
+    creator = models.ForeignKey(User, related_name="my_tasks", on_delete=models.CASCADE)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
