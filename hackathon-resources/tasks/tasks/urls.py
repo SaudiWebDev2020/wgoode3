@@ -17,10 +17,14 @@ Including another URLconf
 from django.urls import path, include
 from rest_framework import routers
 from task_app import views
+from user_app import views as user_views
 
 router = routers.DefaultRouter()
 router.register(r'tasks', views.TaskViewSet)
 
 urlpatterns = [
-    path(r'api/', include(router.urls))
+    path(r'api/', include(router.urls)),
+    path(r'api/users', user_views.UserList.as_view()),
+    path(r'api/users/<int:user_id>', user_views.UserDetails.as_view()),
+    path(r'api/sessions', user_views.UserSession.as_view())
 ]
