@@ -24,6 +24,7 @@ router.register(r'monsters', monster_views.MonsterViewSet)
 
 urlpatterns = [
     path(r'api/', include(router.urls)),
-    path(r'api/users', user_views.UserViewSet.as_view()),
-    path(r'api/sessions', user_views.UserSessionViewSet.as_view())
+    path(r'api/users', user_views.UserList.as_view()),
+    path(r'api/sessions', user_views.UserSessions.as_view()),
+    path(r'api/users/<int:user_id>', user_views.UserDetails.as_view())
 ]

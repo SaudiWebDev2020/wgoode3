@@ -1,10 +1,10 @@
-from rest_framework.response import Response
-from django.contrib.auth import authenticate, login, logout
-from .models import User
 from rest_framework.views import APIView
+from .models import User
 from .serializers import UserSerializer
+from django.contrib.auth import authenticate, login, logout
+from rest_framework.response import Response
 
-class UserViewSet(APIView):
+class UserList(APIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
@@ -30,7 +30,7 @@ class UserViewSet(APIView):
             return Response(serializer.data)
         return Response(serializer.errors)
 
-class UserSessionViewSet(APIView):
+class UserSessions(APIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
@@ -63,3 +63,25 @@ class UserSessionViewSet(APIView):
         """
         logout(request)
         return Response({"msg": "logged out"})
+
+class UserDetails(APIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+    def get(self, request, user_id, format=None):
+        """
+        TODO - use user_id to return details about a single user
+        """
+        return Response({"msg": "ok"})
+
+    def put(self, request, user_id, format=None):
+        """
+        TODO - update the user matching a specific user_id
+        """
+        return Response({"msg": "ok"})
+
+    def delete(self, request, user_id, format=None):
+        """
+        TODO - delete the user matching a specific user_id
+        """
+        return Response({"msg": "ok"})

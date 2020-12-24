@@ -4,8 +4,8 @@ from rest_framework import viewsets
 from .serializers import MonsterSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
-
-# Create your views here.
+# from user_api.models import User
+# this is how we get the user from the user_api
 
 class MonsterViewSet(viewsets.ModelViewSet):
     """
