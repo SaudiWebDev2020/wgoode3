@@ -18,7 +18,7 @@ public Boolean balancePoint(int[] arr) {
 Given an array of numbers return the index where the values on the left add up to equal the values on the right or -1 if there is no such point.
 
 ```java
-public Boolean balanceIndex(int[] arr) {
+public int balanceIndex(int[] arr) {
     // your code here
 }
 
