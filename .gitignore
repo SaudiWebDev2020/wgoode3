@@ -1,5 +1,7 @@
+# remove these from Java Projects
+
 bin/
 .settings/
 .classpath
 .project
-
+*.class

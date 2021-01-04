@@ -13,10 +13,17 @@ public class HungryApplication {
 				break;
 			}
 		}
-		System.out.println(denys.todaysCalories);
+		System.out.println(denys.getTodaysCalories());
 //		denys.eat(jimmy.serve());
-		Ninja will = new Ninja("Will", 2000);
-		System.out.println(Ninja.count);
+		Ninja jason = new Samurai("Jason", 2500);
+		Samurai jack = (Samurai) jason;
+		jack.eat(jimmy.serve(), "Breakfast");
+		jack.eat(jimmy.serve(), "Lunch");
+		jack.eat(jimmy.serve(), "Dinner");
+		jack.eat(jimmy.serve(), "Fourth Meal");
+		System.out.println(jack.getTodaysMeals());
+		System.out.println(Ninja.getCount());
+		jack.eat(jimmy.serve(), "Fourth Meal");
 	}
 	
 }
