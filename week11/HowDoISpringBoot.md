@@ -6,11 +6,11 @@ Inside of `Package Explorer` right click -> new -> Spring Starter Project
 
 Inside of the Pop-up we need to:
 
-* Create a unique project name `Pandas`
+* Create a unique project name, example `Pandas`
 * Make sure the type is `Maven`
 * Set Java Version to `11`
 * Set Packaging to `War`
-* Group name converion... `com.username`
+* Group name convention... `com.username` <-- your username here
 * Package name convention... `com.username.Pandas` <-- your project name here!
 
 Once these are set choose `Next`
@@ -27,30 +27,30 @@ Last, click `Finish`
 Add these to the `<dependencies></dependencies>` tag in the file and save it
 
 ```xml
-    <dependency>
-			<groupId>org.apache.tomcat.embed</groupId>
-			<artifactId>tomcat-embed-jasper</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>jstl</artifactId>
-		</dependency>
-		<dependency>
-		    <groupId>org.webjars</groupId>
-		    <artifactId>bootstrap</artifactId>
-		    <version>4.5.0</version>
-		</dependency>
-		<dependency>
-		    <groupId>org.webjars.bower</groupId>
-		    <artifactId>jquery</artifactId>
-		    <version>3.5.1</version>
-		</dependency>
+<dependency>
+    <groupId>org.apache.tomcat.embed</groupId>
+    <artifactId>tomcat-embed-jasper</artifactId>
+</dependency>
+<dependency>
+    <groupId>javax.servlet</groupId>
+    <artifactId>jstl</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.webjars</groupId>
+    <artifactId>bootstrap</artifactId>
+    <version>4.5.0</version>
+</dependency>
+<dependency>
+    <groupId>org.webjars.bower</groupId>
+    <artifactId>jquery</artifactId>
+    <version>3.5.1</version>
+</dependency>
 ```
 
 ### Step 2 - Create our first View
 
 Create the folder `src/main/webapp/WEB-INF`
-Creare the file `src/main/webapp/WEB-INF/index.jsp`
+Create the file `src/main/webapp/WEB-INF/index.jsp`
 
 Add this code in `index.jsp`
 
@@ -97,10 +97,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class HomeController {
 
-  @GetMapping("/")
-	public String index() {
-		return "index.jsp";
-	}
+    @GetMapping("/")
+    public String index() {
+        return "index.jsp";
+    }
 
 }
 ```
