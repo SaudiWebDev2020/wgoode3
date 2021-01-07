@@ -11,7 +11,7 @@ Inside of the Pop-up we need to:
 * Set Java Version to `11`
 * Set Packaging to `War`
 * Group name convention... `com.username` <-- your username here
-* Package name convention... `com.username.Pandas` <-- your project name here!
+* Package name convention... `com.username.pandas` <-- your project name here!
 
 Once these are set choose `Next`
 
@@ -84,13 +84,15 @@ spring.mvc.view.prefix=/WEB-INF/
 
 ### Step 3 - Make our Controllers
 
-Go to `/src/main/java/` and add a new package inside your project example `com.username.planets.controllers`
+Go to `/src/main/java/` and add a new package inside your project example `com.username.pandas.controllers`
 
 Inside the new `...controlers` package create a new `Java Class` called `HomeController`
 
 In our `HomeController.java` file add the following...
 
 ```java
+package com.username.pandas.controllers;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
