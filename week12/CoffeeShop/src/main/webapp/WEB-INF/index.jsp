@@ -61,7 +61,10 @@
   			<ul class="list-group">
   				<li class="list-group-item bg-dark text-light">Java Shops:</li>
   				<c:forEach items="${shops}" var="s">
-  					<li class="list-group-item">${s.name}</li>
+  					<li class="list-group-item">
+  						${s.name}
+  						<a href="/shop/${s.id}" class="btn btn-sm btn-outline-info float-right">Edit</a>
+  					</li>
   				</c:forEach>
   			</ul>
   		</div>

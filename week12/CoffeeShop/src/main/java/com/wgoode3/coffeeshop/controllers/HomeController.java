@@ -1,5 +1,7 @@
 package com.wgoode3.coffeeshop.controllers;
 
+import java.util.Date;
+
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -8,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.wgoode3.coffeeshop.models.Shop;
@@ -47,11 +50,14 @@ public class HomeController {
 //    	return "redirect:/";
 //    }
     
-    // TODO - make sure the founded date is in the past
     @PostMapping("/shop")
     public String create(@Valid @ModelAttribute("shop") Shop shop, BindingResult result, 
     		HttpSession session, Model model) {
     	System.out.println(shop);
+    	// This checks if the shop founded date is in the past
+    	if(shop.getFounded().after(new Date())) {
+    		result.rejectValue("founded", "time", "The Founded date must be in the past!");
+    	}
     	if(result.hasErrors()) {
     		System.out.println(result.getAllErrors());
     		model.addAttribute("shops", shopServ.getAll());
@@ -70,6 +76,28 @@ public class HomeController {
     @GetMapping("/shop")
     public String showShop() {
     	return "shop.jsp";
+    }
+    
+    @GetMapping("/shop/{id}")
+    public String edit(@PathVariable("id") Long id, Model model) {
+    	model.addAttribute("toEdit", shopServ.getOne(id));
+    	return "edit.jsp";
+    }
+    
+    @PostMapping("/shop/{id}/update")
+    public String edit(@Valid @ModelAttribute("toEdit") Shop toEdit, BindingResult result, 
+    		@PathVariable("id") Long id, Model model) {
+    	if(result.hasErrors()) {
+    		return "edit.jsp";
+    	}
+    	shopServ.update(toEdit);
+    	return "redirect:/shop/" + id;
+    }
+    
+    @GetMapping("/shop/{id}/delete")
+    public String delete(@PathVariable("id") Long id) {
+    	shopServ.remove(id);
+    	return "redirect:/";
     }
 
 }
