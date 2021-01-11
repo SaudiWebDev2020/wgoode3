@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html>
@@ -25,6 +26,8 @@
   			<p>Name: ${shop.name}</p>
   			<p>Location: ${shop.location}</p>
   			<p>Description: ${shop.description}</p>
+  			<p>Opens: <fmt:formatDate type = "time" value = "${shop.open}" /> | 
+  			Closes: <fmt:formatDate type = "time" value = "${shop.close}" /></p>
   			<a href="/" class="btn btn-info">Back</a>
   		</div>
   	</div>

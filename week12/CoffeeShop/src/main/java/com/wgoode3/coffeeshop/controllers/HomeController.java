@@ -11,13 +11,21 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.wgoode3.coffeeshop.models.Shop;
+import com.wgoode3.coffeeshop.services.ShopService;
 
 @Controller
 public class HomeController {
+	
+	private ShopService shopServ;
+	
+	public HomeController(ShopService shopServ) {
+		this.shopServ = shopServ;
+	}
 
     @GetMapping("/")
     public String index(Model model) {
     	model.addAttribute("shop", new Shop());
+    	model.addAttribute("shops", shopServ.getAll());
         return "index.jsp";
     }
     
@@ -39,12 +47,14 @@ public class HomeController {
 //    	return "redirect:/";
 //    }
     
+    // TODO - make sure the founded date is in the past
     @PostMapping("/shop")
     public String create(@Valid @ModelAttribute("shop") Shop shop, BindingResult result, 
-    		HttpSession session) {
+    		HttpSession session, Model model) {
     	System.out.println(shop);
     	if(result.hasErrors()) {
     		System.out.println(result.getAllErrors());
+    		model.addAttribute("shops", shopServ.getAll());
     		return "index.jsp"; // if there are errors re-render the page
     	}
     	Integer count = (Integer) session.getAttribute("count");
@@ -53,6 +63,7 @@ public class HomeController {
     	}
     	session.setAttribute("count", count+1);
     	session.setAttribute("shop", shop);
+    	shopServ.create(shop);
     	return "redirect:/shop"; // if the data is valid redirect
     }
     

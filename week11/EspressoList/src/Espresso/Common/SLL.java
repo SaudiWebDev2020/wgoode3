@@ -2,7 +2,7 @@ package Espresso.Common;
 
 public class SLL<T> {
 
-	private SLNode<T> head;
+	public SLNode<T> head;
 	private int length = 0;
 	
 	public SLL() {}
@@ -58,10 +58,31 @@ public class SLL<T> {
 		String res = "[";
 		SLNode<T> runner = head;
 		while(runner.next != null) {
+//			System.out.println(runner.value + " ");
 			res += runner.value + ", ";
 			runner = runner.next;
 		}
 		return res + runner.value + "]";
+	}
+	
+	public Boolean hasLoop() {
+		if(head == null) {
+			return false;
+		} else if(head.next == null) {
+			return false;
+		} else {
+			SLNode<T> walker = head;
+			SLNode<T> runner = head.next;
+			while(runner.next != null && runner != null) {
+//				System.out.println(walker.value + " " + runner.value);
+				if(walker == runner) {
+					return true;
+				}
+				walker = walker.next;
+				runner = runner.next.next;
+			}
+			return false;
+		}
 	}
 	
 }

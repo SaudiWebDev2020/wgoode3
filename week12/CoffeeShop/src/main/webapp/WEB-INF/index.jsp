@@ -17,38 +17,55 @@
   	<div class="jumbotron">
 	    <h1>Java Shop</h1>
   	</div>
-  	<form:form action="/shop" method="post" modelAttribute="shop">
-  		<div class="form-group">
-  			<label>Shop Name:</label>
-  			<form:input path="name" class="form-control" />
-  			<form:errors path="name" class="text-danger" />
+  	<div class="row">
+  		<div class="col-sm-8">  		
+		  	<form:form action="/shop" method="post" modelAttribute="shop">
+		  		<div class="form-group">
+		  			<label>Shop Name:</label>
+		  			<form:input path="name" class="form-control" />
+		  			<form:errors path="name" class="text-danger" />
+		  		</div>
+		  		<div class="form-group">
+		  			<label>Shop Location:</label>
+		  			<form:input path="location" class="form-control" />
+		  			<form:errors path="location" class="text-danger" />
+		  		</div>
+		  		<div class="form-group">
+		  			<label>Description:</label>
+		  			<form:textarea path="description" class="form-control"/>
+		  			<form:errors path="description" class="text-danger" />
+		  		</div>
+		  		<div class="form-group">
+		  			<label>Date Founded:</label>
+		  			<form:input path="founded" type="date" class="form-control" />
+		  			<form:errors path="founded" class="text-danger" />
+		  		</div>
+		  		<div class="row">
+		  			<div class="col-sm-6">
+						<div class="form-group">
+							<label>Open Time:</label>
+							<form:input path="open" type="time" class="form-control" />
+						</div>
+					</div>
+		  			<div class="col-sm-6">
+		  				<div class="form-group">
+							<label>Close Time:</label>
+							<form:input path="close" type="time" class="form-control" />
+						</div>
+		  			</div>
+		  		</div>
+		  		<input type="submit" value="Add Shop" class="btn btn-dark" />
+		  	</form:form>
   		</div>
-  		<div class="form-group">
-  			<label>Shop Location:</label>
-  			<form:input path="location" class="form-control" />
-  			<form:errors path="location" class="text-danger" />
+  		<div class="col-sm-4">
+  			<ul class="list-group">
+  				<li class="list-group-item bg-dark text-light">Java Shops:</li>
+  				<c:forEach items="${shops}" var="s">
+  					<li class="list-group-item">${s.name}</li>
+  				</c:forEach>
+  			</ul>
   		</div>
-  		<div class="form-group">
-  			<label>Description:</label>
-  			<form:textarea path="description" class="form-control"/>
-  			<form:errors path="description" class="text-danger" />
-  		</div>
-  		<div class="row">
-  			<div class="col-sm-6">
-				<div class="form-group">
-					<label>Open Time:</label>
-					<form:input path="open" type="time" class="form-control" />
-				</div>
-			</div>
-  			<div class="col-sm-6">
-  				<div class="form-group">
-					<label>Close Time:</label>
-					<form:input path="close" type="time" class="form-control" />
-				</div>
-  			</div>
-  		</div>
-  		<input type="submit" value="Add Shop" class="btn btn-dark" />
-  	</form:form>
+  	</div>
   </div>
 </body>
 </html>
