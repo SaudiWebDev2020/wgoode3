@@ -13,16 +13,20 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.wgoode3.coffeeshop.models.Drink;
 import com.wgoode3.coffeeshop.models.Shop;
+import com.wgoode3.coffeeshop.services.DrinkService;
 import com.wgoode3.coffeeshop.services.ShopService;
 
 @Controller
 public class HomeController {
 	
 	private ShopService shopServ;
+	private DrinkService drinkServ;
 	
-	public HomeController(ShopService shopServ) {
+	public HomeController(ShopService shopServ, DrinkService drinkServ) {
 		this.shopServ = shopServ;
+		this.drinkServ = drinkServ;
 	}
 
     @GetMapping("/")
@@ -79,13 +83,20 @@ public class HomeController {
     }
     
     @GetMapping("/shop/{id}")
+    public String view(@PathVariable("id") Long id, Model model) {
+    	model.addAttribute("shop", shopServ.getOne(id));
+    	model.addAttribute("newDrink", new Drink());
+    	return "view.jsp";
+    }
+    
+    @GetMapping("/shop/{id}/edit")
     public String edit(@PathVariable("id") Long id, Model model) {
     	model.addAttribute("toEdit", shopServ.getOne(id));
     	return "edit.jsp";
     }
     
     @PostMapping("/shop/{id}/update")
-    public String edit(@Valid @ModelAttribute("toEdit") Shop toEdit, BindingResult result, 
+    public String update(@Valid @ModelAttribute("toEdit") Shop toEdit, BindingResult result, 
     		@PathVariable("id") Long id, Model model) {
     	if(result.hasErrors()) {
     		return "edit.jsp";
@@ -99,5 +110,18 @@ public class HomeController {
     	shopServ.remove(id);
     	return "redirect:/";
     }
+    
+    @PostMapping("/shop/{shop_id}/adddrink")
+    public String addDrink(@Valid @ModelAttribute("newDrink") Drink newDrink, BindingResult result, 
+    			@PathVariable("shop_id") Long shop_id, Model model) {
+    	if(result.hasErrors()) {
+    		model.addAttribute("shop", shopServ.getOne(shop_id));
+    		return "view.jsp";
+    	}
+    	drinkServ.create(newDrink);
+    	return "redirect:/shop/" + shop_id;
+    }
+    
+    
 
 }

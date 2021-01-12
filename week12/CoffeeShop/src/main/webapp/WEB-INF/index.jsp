@@ -63,7 +63,8 @@
   				<c:forEach items="${shops}" var="s">
   					<li class="list-group-item">
   						${s.name}
-  						<a href="/shop/${s.id}" class="btn btn-sm btn-outline-info float-right">Edit</a>
+  						<a href="/shop/${s.id}/edit" class="btn btn-sm btn-outline-info float-right">Edit</a>
+  						<a href="/shop/${s.id}" class="btn btn-sm btn-outline-primary float-right mr-2">View</a>
   					</li>
   				</c:forEach>
   			</ul>
