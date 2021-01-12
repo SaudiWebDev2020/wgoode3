@@ -17,6 +17,10 @@
   	<div class="jumbotron">
 	    <h1>Java Shop</h1>
   	</div>
+  	<form action="/search" class="my-3">
+  		<input type="text" name="q" />
+  		<input type="submit" value="Search" />
+  	</form>
   	<div class="row">
   		<div class="col-sm-8">  		
 		  	<form:form action="/shop" method="post" modelAttribute="shop">

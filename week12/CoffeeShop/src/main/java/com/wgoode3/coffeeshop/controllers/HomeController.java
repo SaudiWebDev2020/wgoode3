@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.wgoode3.coffeeshop.models.Drink;
 import com.wgoode3.coffeeshop.models.Shop;
@@ -122,6 +123,16 @@ public class HomeController {
     	return "redirect:/shop/" + shop_id;
     }
     
+    @GetMapping("/top3")
+    public String top3(Model model) {
+    	model.addAttribute("top3drinks", drinkServ.top3HealthyDrinks());
+    	return "top3.jsp";
+    }
     
+    @GetMapping("/search")
+    public String searchResults(@RequestParam("q") String q, Model model) {
+    	model.addAttribute("top3drinks", drinkServ.searchByName(q));
+    	return "top3.jsp";
+    }
 
 }

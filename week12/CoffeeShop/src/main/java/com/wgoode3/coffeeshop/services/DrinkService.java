@@ -1,5 +1,7 @@
 package com.wgoode3.coffeeshop.services;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.wgoode3.coffeeshop.models.Drink;
@@ -16,6 +18,14 @@ public class DrinkService {
 	
 	public Drink create(Drink newDrink) {
 		return drinkRepo.save(newDrink);
+	}
+	
+	public List<Drink> top3HealthyDrinks() {
+		return drinkRepo.top3healthy();
+	}
+	
+	public List<Drink> searchByName(String query) {
+		return drinkRepo.findByNameContaining(query);
 	}
 	
 }
