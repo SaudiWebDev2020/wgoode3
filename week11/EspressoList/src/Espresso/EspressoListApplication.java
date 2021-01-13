@@ -1,6 +1,7 @@
 package Espresso;
 
 import Espresso.Common.SLL;
+import Espresso.Uncommon.DLL;
 
 public class EspressoListApplication {
 
@@ -22,10 +23,21 @@ public class EspressoListApplication {
 		groceries.yeet("Tomatoes");
 		groceries.yeet("Potatoes");
 		groceries.yeet("Onion");
-		System.out.println(groceries);
+//		System.out.println(groceries);
 //		System.out.println(groceries.size());
 //		groceries.head.next.next.next.next = groceries.head.next;
-		System.out.println(groceries.hasLoop());
+//		System.out.println(groceries.hasLoop());
+
+		DLL<Integer> list1 = new DLL<Integer>();
+		list1.push(3);
+		list1.push(8);
+		System.out.println(list1);
+		list1.addFront(9);
+		System.out.println(list1);
+		list1.pop();
+		System.out.println(list1);
+		list1.remFront();
+		System.out.println(list1);
 	}
 	
 }
