@@ -52,4 +52,20 @@ public class StoreService {
 		return prodRepo.save(newProduct);
 	}
 	
+	public void removeCat(Long p_id, Long c_id) {
+		Optional<Product> prod = prodRepo.findById(p_id);
+		if(prod.isPresent()) {
+			List<Category> cats = prod.get().getCategories();
+			for(int i=0; i<cats.size(); i++) {
+				if(cats.get(i).getId() == c_id) {
+					cats.remove(i);
+					break;
+				}
+			}
+			Product updated = prod.get();
+			updated.setCategories(cats);
+			prodRepo.save(updated);
+		}
+	}
+	
 }

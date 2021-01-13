@@ -29,8 +29,8 @@ public class Product {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Size(min = 2, message = "Category name must be 2 characters or longer!")
-	@Size(max = 20, message = "Category name must be fewer than 20 characters long!")
+	@Size(min = 2, message = "Product name must be 2 characters or longer!")
+	@Size(max = 20, message = "Product name must be fewer than 20 characters long!")
 	private String name;
 	
 	@Min(value = 0, message = "Price cannot be negative")
@@ -54,6 +54,8 @@ public class Product {
     // this is useful for our form that creates products and categories
     // at the same time
     @Transient
+	@Size(min = 2, message = "Categories should be at least 2 characters!")
+	@Size(max = 50, message = "Categories must be fewer than 50 characters!")
     private String categoryInput; 
 	
 	public Product() {}
