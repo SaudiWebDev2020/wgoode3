@@ -31,12 +31,17 @@ public class EspressoListApplication {
 		DLL<Integer> list1 = new DLL<Integer>();
 		list1.push(3);
 		list1.push(8);
-		System.out.println(list1);
+		list1.push(5);
+//		System.out.println(list1);
+		list1.addFront(1);
 		list1.addFront(9);
+		list1.addFront(4);
+//		System.out.println(list1);
+//		list1.pop();
+//		System.out.println(list1);
+//		list1.remFront();
 		System.out.println(list1);
-		list1.pop();
-		System.out.println(list1);
-		list1.remFront();
+		list1.reverse();
 		System.out.println(list1);
 	}
 	

@@ -53,6 +53,18 @@ public class DLL<T> {
 		return val;
 	}
 	
+	public void reverse() {
+		DLNode<T> runner = head;
+		DLNode<T> backward = tail;
+		while(runner != backward && runner.prev != backward) {
+			T temp = runner.value;
+			runner.value = backward.value;
+			backward.value = temp;
+			runner = runner.next;
+			backward = backward.prev;
+		}
+	}
+	
 	public String toString() {
 		String output = "[";
 		DLNode<T> runner = head;
