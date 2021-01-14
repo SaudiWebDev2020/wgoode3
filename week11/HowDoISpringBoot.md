@@ -102,6 +102,22 @@ spring.jpa.hibernate.ddl-auto=update
 spring.mvc.view.prefix=/WEB-INF/
 ```
 
+#### Important!
+
+Don't forget to create the `PandaDB` schema in MySQL.
+
+(if you want to do this from the command line you can access the MySQL shell this way)
+
+```sh
+mysql -u root -p
+# when prompted enter the password: root
+```
+
+```sql
+CREATE SCHEMA PandaDB;
+exit;
+```
+
 ### Step 3 - Make out Models
 
 Go to `/src/main/java/` and add a new package inside your project example `com.username.pandas.models`
@@ -118,7 +134,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name="notes")
@@ -128,7 +144,7 @@ public class Note {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotNull(message="Your note cannot be blank")
+	@NotEmpty(message="Your note cannot be blank")
 	private String text;
 	
 	public Note() {}
@@ -172,7 +188,45 @@ import com.username.pandas.models.Note;
 public interface NoteRepository extends CrudRepository<Note, Long> {}
 ```
 
-### Step ? - Make our Controllers
+### Step 5 - Make our Services
+
+Go to `/src/main/java/` and add a new package inside your project example `com.username.pandas.services`
+
+Inside the new `...services` package create a new `Java Class` called `NoteService`
+
+In our `NoteService.java` file add the following...
+
+```java
+package com.username.pandas.services;
+
+import java.util.ArrayList;
+
+import org.springframework.stereotype.Service;
+
+import com.username.pandass.models.Note;
+import com.username.pandas.repositories.NoteRepository;
+
+@Service
+public class NoteService {
+
+	private NoteRepository noteRepo;
+	
+	public NoteService(NoteRepository noteRepo) {
+		this.noteRepo = noteRepo;
+	}
+	
+	public ArrayList<Note> getAll() {
+		return (ArrayList<Note>) noteRepo.findAll();
+	}
+	
+	public Note create(Note newNote) {
+		return noteRepo.save(newNote);
+	}
+	
+}
+```
+
+### Step 6 - Make our Controllers
 
 Go to `/src/main/java/` and add a new package inside your project example `com.username.pandas.controllers`
 
@@ -183,21 +237,71 @@ In our `HomeController.java` file add the following...
 ```java
 package com.username.pandas.controllers;
 
+import javax.validation.Valid;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import com.username.pandas.models.Note;
+import com.username.pandas.services.NoteService;
 
 @Controller
 public class HomeController {
 
-    @GetMapping("/")
-    public String index() {
-        return "index.jsp";
-    }
-
+	private NoteService noteServ;
+	
+	public HomeController(NoteService noteServ) {
+		this.noteServ = noteServ;
+	}
+	
+	@GetMapping("/")
+	public String index(Model model) {
+		model.addAttribute("newNote", new Note()); // binds to form helper in index.jsp
+		model.addAttribute("allNotes", noteServ.getAll()); // displays all notes 
+		return "index.jsp";
+	}
+	
+	@PostMapping("/note")
+	public String create(@Valid @ModelAttribute("newNote") Note newNote, 
+			BindingResult result, Model model) {
+		if(result.hasErrors()) {
+			// still display notes if validation error
+			model.addAttribute("allNotes", noteServ.getAll()); 
+			return "index.jsp";
+		}
+		// otherwise create a note and redirect back
+		noteServ.create(newNote);
+		return "redirect:/";
+	}
+	
 }
 ```
 
-### Step 4 - running the server
+### Step 7 - add to index.jsp
+
+Inside of `index.jsp` add the following...
+
+```html
+<ul class="list-group">
+    	<li class="list-group-item">Notes</li>
+    	<c:forEach items="${allNotes}" var="note">
+    		<li class="list-group-item">${note.text}</li>
+    	</c:forEach>
+    	<li class="list-group-item">
+    		<form:form action="/note" method="post" modelAttribute="newNote">
+    			<form:input path="text" placeholder="Your note here..."/>
+    			<form:errors path="text" class="text-danger" />
+    			<input type="submit" value="Add Note" class="btn btn-sm btn-primary" />
+    		</form:form>
+    	</li>
+    </ul>
+```
+
+### Step 8 - running the server
 
 Right click on the `PandasApplication.java` -> run as -> Spring Boot App
 
