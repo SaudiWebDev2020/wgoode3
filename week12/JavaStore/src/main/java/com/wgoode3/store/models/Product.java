@@ -17,6 +17,7 @@ import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -33,6 +34,7 @@ public class Product {
 	@Size(max = 20, message = "Product name must be fewer than 20 characters long!")
 	private String name;
 	
+	@NotNull(message="Price is required!")
 	@Min(value = 0, message = "Price cannot be negative")
 	private Double price;
 	
