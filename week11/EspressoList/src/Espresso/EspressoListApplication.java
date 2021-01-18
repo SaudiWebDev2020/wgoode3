@@ -1,6 +1,7 @@
 package Espresso;
 
 import Espresso.Common.SLL;
+import Espresso.Rare.BST;
 import Espresso.Uncommon.DLL;
 
 public class EspressoListApplication {
@@ -40,9 +41,19 @@ public class EspressoListApplication {
 //		list1.pop();
 //		System.out.println(list1);
 //		list1.remFront();
-		System.out.println(list1);
-		list1.reverse();
-		System.out.println(list1);
+//		System.out.println(list1);
+//		list1.reverse();
+//		System.out.println(list1);
+		
+		BST oak = new BST();
+		oak.Add(100);
+		oak.Add(200);
+		oak.Add(150);
+		oak.Add(400);
+		oak.Add(70);
+		oak.Add(30);
+		oak.Add(90);
+		System.out.println(oak.Size());
 	}
 	
 }

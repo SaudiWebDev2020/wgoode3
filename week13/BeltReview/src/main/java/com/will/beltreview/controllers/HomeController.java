@@ -37,7 +37,7 @@ public class HomeController {
 			return "index.jsp";
 		} else {
 			session.setAttribute("user_id", newUser.getId());
-			return "redirect:/";
+			return "redirect:/home";
 		}
 	}
 	
@@ -50,7 +50,7 @@ public class HomeController {
 			return "index.jsp";
 		}
 		session.setAttribute("user_id", u.getId());
-		return "redirect:/";
+		return "redirect:/home";
 		
 	}
 	
@@ -58,6 +58,18 @@ public class HomeController {
 	public String logout(HttpSession session) {
 		session.removeAttribute("user_id");
 		return "redirect:/";
+	}
+	
+	@GetMapping("/home")
+	public String home(HttpSession session, Model model) {
+		// if we're logged in we get back a user
+		User loggedInUser = userServ.findOne( (Long) session.getAttribute("user_id") );
+		if(loggedInUser == null) {
+			// if the user is null return them to the login form
+			return "redirect:/";
+		}
+		model.addAttribute("user", loggedInUser);
+		return "home.jsp";
 	}
 	
 }

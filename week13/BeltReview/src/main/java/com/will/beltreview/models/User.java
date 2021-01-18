@@ -1,12 +1,15 @@
 package com.will.beltreview.models;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -23,9 +26,17 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotEmpty(message="Username is required!")
-	@Size(min=3, max=30, message="Username must be between 3 and 30 characters")
-	private String username;
+	@NotEmpty(message="First Name is required!")
+	@Size(min=3, max=30, message="First Name must be between 3 and 30 characters")
+	private String firstName;
+	
+	@NotEmpty(message="Last Name is required!")
+	@Size(min=3, max=30, message="Last Name must be between 3 and 30 characters")
+	private String lastName;
+	
+	private String tagLine;
+	
+	private String description;
 	
 	@NotEmpty(message="Email is required!")
 	@Email(message="Please enter a valid email!")
@@ -45,6 +56,9 @@ public class User {
 	
 	private Date updatedAt;
 	
+	@OneToMany(mappedBy="planner", fetch = FetchType.LAZY)
+	private List<Trip> plannedTrips;
+	
 	public User() {}
 
 	public Long getId() {
@@ -55,13 +69,6 @@ public class User {
 		this.id = id;
 	}
 
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
 
 	public String getEmail() {
 		return email;
@@ -111,6 +118,38 @@ public class User {
 	@PreUpdate
 	protected void onUpdate() {
 		this.updatedAt = new Date();
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getTagLine() {
+		return tagLine;
+	}
+
+	public void setTagLine(String tagLine) {
+		this.tagLine = tagLine;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	
 }

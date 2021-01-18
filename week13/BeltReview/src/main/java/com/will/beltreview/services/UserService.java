@@ -18,6 +18,9 @@ public class UserService {
 	private UserRepository userRepo;
 	
 	public User findOne(Long id) {
+		if(id == null) {
+			return null;
+		}
 		Optional<User> potentialUser = userRepo.findById(id);
 		return potentialUser.isPresent() ? potentialUser.get() : null;
 	}
