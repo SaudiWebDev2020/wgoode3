@@ -75,6 +75,7 @@ public class HomeController {
 			return "redirect:/";
 		}
 		model.addAttribute("user", loggedInUser);
+		model.addAttribute("allTrips", tripServ.getTrippin());
 		return "home.jsp";
 	}
 	
@@ -129,6 +130,26 @@ public class HomeController {
 		newAct.setTrip(tripServ.findTrip(id));
 		tripServ.planActivity(newAct, result);
 		return "redirect:/trips/" + id;
+	}
+	
+	@GetMapping("/trip/{id}/join")
+	public String joinTrip(@PathVariable("id") Long id, HttpSession session) {
+		User loggedInUser = userServ.findOne( (Long) session.getAttribute("user_id") );
+		if(loggedInUser == null) {
+			return "redirect:/";
+		}
+		tripServ.joinTrip(id, loggedInUser.getId());
+		return "redirect:/home";
+	}
+	
+	@GetMapping("/trip/{id}/leave")
+	public String leaveTrip(@PathVariable("id") Long id, HttpSession session) {
+		User loggedInUser = userServ.findOne( (Long) session.getAttribute("user_id") );
+		if(loggedInUser == null) {
+			return "redirect:/";
+		}
+		tripServ.leaveTrip(id, loggedInUser.getId());
+		return "redirect:/home";
 	}
 	
 }

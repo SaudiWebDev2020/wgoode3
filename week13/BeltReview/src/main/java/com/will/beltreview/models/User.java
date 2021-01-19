@@ -9,6 +9,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
@@ -58,6 +61,14 @@ public class User {
 	
 	@OneToMany(mappedBy="planner", fetch = FetchType.LAZY)
 	private List<Trip> plannedTrips;
+	
+	@ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "party", 
+        joinColumns = @JoinColumn(name = "user_id"), 
+        inverseJoinColumns = @JoinColumn(name = "trip_id")
+    )
+	private List<Trip> joinedTrips;
 	
 	public User() {}
 
@@ -150,6 +161,22 @@ public class User {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public List<Trip> getPlannedTrips() {
+		return plannedTrips;
+	}
+
+	public void setPlannedTrips(List<Trip> plannedTrips) {
+		this.plannedTrips = plannedTrips;
+	}
+
+	public List<Trip> getJoinedTrips() {
+		return joinedTrips;
+	}
+
+	public void setJoinedTrips(List<Trip> joinedTrips) {
+		this.joinedTrips = joinedTrips;
 	}
 	
 }

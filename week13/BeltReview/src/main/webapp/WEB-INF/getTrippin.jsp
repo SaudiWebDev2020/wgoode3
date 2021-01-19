@@ -33,12 +33,19 @@
 						</p>
 						<p>Planner: ${theTrip.planner.firstName}
 							${theTrip.planner.lastName}</p>
+							
+						<ul class="list-group">
+							<li class="list-group-item">Party Like it's 1999</li>
+							<c:forEach items="${theTrip.party}" var="u">						
+								<li class="list-group-item">${u.firstName} ${u.lastName}</li>
+							</c:forEach>
+						</ul>
 					</div>
 				</div>
 			</div>
 			<div class="col-sm-8">
 				<h3>Itenerary</h3>
-				<c:forEach items="${theTrip.intenerary}" var="a">
+				<c:forEach items="${theTrip.itenerary}" var="a">
 					<div class="card mt-3">
 						<div class="card-header">${a.city},${a.country}</div>
 						<div class="card-body">

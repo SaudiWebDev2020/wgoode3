@@ -10,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
@@ -68,7 +70,15 @@ public class Trip {
 	private User planner;
 	
 	@OneToMany(mappedBy="trip", fetch = FetchType.LAZY)
-	private List<Activity> intenerary;
+	private List<Activity> itenerary;
+	
+	@ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "party", 
+        joinColumns = @JoinColumn(name = "trip_id"), 
+        inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+	private List<User> party;
 	
 	@Column(updatable = false)
 	private Date createdAt;
@@ -133,12 +143,12 @@ public class Trip {
 		this.updatedAt = updatedAt;
 	}
 	
-	public List<Activity> getIntenerary() {
-		return intenerary;
+	public List<Activity> getItenerary() {
+		return itenerary;
 	}
 
-	public void setIntenerary(List<Activity> intenerary) {
-		this.intenerary = intenerary;
+	public void setItenerary(List<Activity> itenerary) {
+		this.itenerary = itenerary;
 	}
 
 	public String getDescription() {
@@ -191,4 +201,21 @@ public class Trip {
 		this.updatedAt = new Date();
 	}
 
+	public List<User> getParty() {
+		return party;
+	}
+
+	public void setParty(List<User> party) {
+		this.party = party;
+	}
+
+	public Boolean isOnTrip(Long user_id) {
+		for(User u : party) {
+			if(u.getId() == user_id) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 }
