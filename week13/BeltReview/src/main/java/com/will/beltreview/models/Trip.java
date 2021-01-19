@@ -15,8 +15,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name="trips")
@@ -29,11 +32,36 @@ public class Trip {
 	@NotEmpty(message="Your planned trip must have a name!")
 	private String name;
 	
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	@NotNull(message="You planned trip must have a Start Date")
 	private Date start;
 	
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	@NotNull(message="You planned trip must have a End Date")
 	private Date end;
+	
+	@Transient
+	@NotEmpty(message="Your First Activity description cannot be empty!")
+	private String description;
+	
+	// TODO - HOW DO WE FORMAT datetime-local?
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+	@Transient
+	@NotNull(message="You First Activity must have a Start Date")
+	private Date actStart;
+	
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+	@Transient
+	@NotNull(message="You First Activity must have a End Date")
+	private Date actEnd;
+	
+	@Transient
+	@NotEmpty(message="Your First Activity Country is required!")
+	private String country;
+	
+	@Transient
+	@NotEmpty(message="Your First Activity City / Area is required!")
+	private String city;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="user_id")
@@ -111,6 +139,46 @@ public class Trip {
 
 	public void setIntenerary(List<Activity> intenerary) {
 		this.intenerary = intenerary;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
+	public Date getActStart() {
+		return actStart;
+	}
+
+	public void setActStart(Date actStart) {
+		this.actStart = actStart;
+	}
+
+	public Date getActEnd() {
+		return actEnd;
+	}
+
+	public void setActEnd(Date actEnd) {
+		this.actEnd = actEnd;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
 	}
 
 	@PrePersist

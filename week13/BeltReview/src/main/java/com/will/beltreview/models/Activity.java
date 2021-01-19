@@ -17,40 +17,54 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
-@Table(name="activities")
+@Table(name = "activities")
 public class Activity {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@NotEmpty(message="Your Activity must have a Description!")
-	@Size(min=3, max=1000, message="Description must be between 3 and 1000 in length")
+
+	@NotEmpty(message = "Your Activity must have a Description!")
+	@Size(min = 3, max = 1000, message = "Description must be between 3 and 1000 in length")
 	private String description;
 
-	@NotEmpty(message="Your Activity Location must have a country!")
+	@NotEmpty(message = "Your Activity Location must have a country!")
 	private String country;
-	
-	@NotEmpty(message="Your Activity Location must have a city / region!")
+
+	@NotEmpty(message = "Your Activity Location must have a city / region!")
 	private String city;
-	
-	@NotNull(message="Your Activity must have a Start Date")
+
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+	@NotNull(message = "Your Activity must have a Start Date")
 	private Date start;
-	
-	@NotNull(message="Your Activity trip must have a End Date")
+
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+	@NotNull(message = "Your Activity trip must have a End Date")
 	private Date end;
-	
+
 	@Column(updatable = false)
 	private Date createdAt;
-	
+
 	private Date updatedAt;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="trip_id")
+	@JoinColumn(name = "trip_id")
 	private Trip trip;
-	
-	public Activity() {}
+
+	public Activity() {
+	}
+
+	public Activity(String description, String country, String city, Date start, Date end, Trip trip) {
+		this.description = description;
+		this.country = country;
+		this.city = city;
+		this.start = start;
+		this.end = end;
+		this.trip = trip;
+	}
 
 	public Long getId() {
 		return id;
@@ -123,7 +137,7 @@ public class Activity {
 	public void setTrip(Trip trip) {
 		this.trip = trip;
 	}
-	
+
 	@PrePersist
 	protected void onCreate() {
 		this.createdAt = new Date();
@@ -133,5 +147,5 @@ public class Activity {
 	protected void onUpdate() {
 		this.updatedAt = new Date();
 	}
-	
+
 }

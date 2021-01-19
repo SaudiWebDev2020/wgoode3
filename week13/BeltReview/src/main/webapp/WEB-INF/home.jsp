@@ -17,6 +17,7 @@
 	<div class="container">
 		<h1>Welcome ${user.firstName}!</h1>
 		<a href="/logout" class="btn btn-danger">Logout</a>
+		<a href="/trips/new" class="btn btn-info">Plan a new trip!</a>
 	</div>
 </body>
 </html>

@@ -9,10 +9,14 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.will.beltreview.models.Activity;
 import com.will.beltreview.models.LoginUser;
+import com.will.beltreview.models.Trip;
 import com.will.beltreview.models.User;
+import com.will.beltreview.services.TripService;
 import com.will.beltreview.services.UserService;
 
 @Controller
@@ -20,6 +24,8 @@ public class HomeController {
 
 	@Autowired
 	private UserService userServ;
+	@Autowired
+	private TripService tripServ;
 	
 	@GetMapping("/")
 	public String index(Model model) {
@@ -70,6 +76,59 @@ public class HomeController {
 		}
 		model.addAttribute("user", loggedInUser);
 		return "home.jsp";
+	}
+	
+	@GetMapping("/trips/new")
+	public String newTrip(HttpSession session, Model model) {
+		User loggedInUser = userServ.findOne( (Long) session.getAttribute("user_id") );
+		if(loggedInUser == null) {
+			return "redirect:/";
+		}
+		model.addAttribute("newTrip", new Trip());
+		return "newTrip.jsp";
+	}
+	
+	@PostMapping("/trips")
+	public String planTrip(@Valid @ModelAttribute("newTrip") Trip newTrip, BindingResult result, 
+			HttpSession session, Model model) {
+		User loggedInUser = userServ.findOne( (Long) session.getAttribute("user_id") );
+		if(loggedInUser == null) {
+			return "redirect:/";
+		}
+		if(result.hasErrors()) {
+			return "newTrip.jsp";
+		}
+		newTrip.setPlanner(loggedInUser);
+		tripServ.planTrip(newTrip, result);
+		return "redirect:/home";
+	}
+	
+	@GetMapping("/trips/{id}")
+	public String getTrippin(@PathVariable("id") Long id, HttpSession session, Model model) {
+		User loggedInUser = userServ.findOne( (Long) session.getAttribute("user_id") );
+		if(loggedInUser == null) {
+			return "redirect:/";
+		}
+		model.addAttribute("theTrip", tripServ.findTrip(id));
+		model.addAttribute("newAct", new Activity());
+		return "getTrippin.jsp";
+	}
+	
+	@PostMapping("/trips/{id}/add_activity")
+	public String addActivity(@Valid @ModelAttribute("newAct") Activity newAct, BindingResult result, 
+			@PathVariable("id") Long id, HttpSession session, Model model) {
+		User loggedInUser = userServ.findOne( (Long) session.getAttribute("user_id") );
+		if(loggedInUser == null) {
+			return "redirect:/";
+		}
+		System.out.println(result.hasErrors());
+		if(result.hasErrors()) {	
+			model.addAttribute("theTrip", tripServ.findTrip(id));
+			return "getTrippin.jsp";
+		}
+		newAct.setTrip(tripServ.findTrip(id));
+		tripServ.planActivity(newAct, result);
+		return "redirect:/trips/" + id;
 	}
 	
 }
