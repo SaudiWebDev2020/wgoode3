@@ -54,6 +54,16 @@ public class EspressoListApplication {
 		oak.Add(30);
 		oak.Add(90);
 		System.out.println(oak.Size());
+		System.out.println(oak.Height());
+		System.out.println(oak.isBalanced());
+		oak.Add(10);
+		System.out.println(oak.Size());
+		System.out.println(oak.Height());
+		System.out.println(oak.isBalanced());
+		oak.Add(1);
+		System.out.println(oak.Size());
+		System.out.println(oak.Height());
+		System.out.println(oak.isBalanced());
 	}
 	
 }
