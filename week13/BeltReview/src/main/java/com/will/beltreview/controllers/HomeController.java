@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.will.beltreview.models.Activity;
+import com.will.beltreview.models.EditTrip;
 import com.will.beltreview.models.LoginUser;
 import com.will.beltreview.models.Trip;
 import com.will.beltreview.models.User;
@@ -149,6 +150,42 @@ public class HomeController {
 			return "redirect:/";
 		}
 		tripServ.leaveTrip(id, loggedInUser.getId());
+		return "redirect:/home";
+	}
+	
+	@GetMapping("/cancel/{id}")
+	public String cancelTrip(@PathVariable("id") Long id, HttpSession session) {
+		User loggedInUser = userServ.findOne( (Long) session.getAttribute("user_id") );
+		if(loggedInUser == null) {
+			return "redirect:/";
+		}
+		tripServ.cancel(id, loggedInUser.getId());
+		return "redirect:/home";
+	}
+	
+	@GetMapping("/trip/{id}/edit")
+	public String editTrip(@PathVariable("id") Long id, HttpSession session, Model model) {
+		User loggedInUser = userServ.findOne( (Long) session.getAttribute("user_id") );
+		if(loggedInUser == null) {
+			return "redirect:/";
+		}
+		EditTrip toEdit = new EditTrip(tripServ.findTrip(id));
+		model.addAttribute("existingTrip", toEdit);
+		return "edit.jsp";
+	}
+	
+	@PostMapping("/trip/{id}/update")
+	public String updateTrip(@Valid @ModelAttribute("existingTrip") EditTrip existingTrip, BindingResult result, 
+			HttpSession session, Model model) {
+		User loggedInUser = userServ.findOne( (Long) session.getAttribute("user_id") );
+		if(loggedInUser == null) {
+			return "redirect:/";
+		}
+		System.out.println(result.getAllErrors());
+		if(result.hasErrors()) {
+			return "edit.jsp";
+		}
+		tripServ.updateTrip(existingTrip);
 		return "redirect:/home";
 	}
 	

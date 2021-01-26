@@ -3,6 +3,7 @@ package com.will.beltreview.models;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -59,10 +60,10 @@ public class User {
 	
 	private Date updatedAt;
 	
-	@OneToMany(mappedBy="planner", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy="planner", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, orphanRemoval = true)
 	private List<Trip> plannedTrips;
 	
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JoinTable(
         name = "party", 
         joinColumns = @JoinColumn(name = "user_id"), 

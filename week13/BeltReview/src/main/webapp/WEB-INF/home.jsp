@@ -40,7 +40,8 @@
 					</td>
 					<td>
 						<c:if test="${user.id == t.planner.id}">
-							<a href="#" class="btn btn-sm btn-outline-danger">Cancel</a>
+							<a href="/cancel/${t.id}" class="btn btn-sm btn-outline-danger">Cancel</a>
+							<a href="/trip/${t.id}/edit" class="btn btn-sm btn-outline-success">Edit</a>
 						</c:if>
 						<c:if test="${user.id != t.planner.id}">
 							<c:if test="${t.isOnTrip(user.id)}">

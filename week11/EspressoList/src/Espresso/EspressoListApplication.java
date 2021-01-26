@@ -1,6 +1,7 @@
 package Espresso;
 
 import Espresso.Common.SLL;
+import Espresso.Epic.Trie;
 import Espresso.Rare.BST;
 import Espresso.Uncommon.DLL;
 
@@ -53,17 +54,31 @@ public class EspressoListApplication {
 		oak.Add(70);
 		oak.Add(30);
 		oak.Add(90);
-		System.out.println(oak.Size());
-		System.out.println(oak.Height());
-		System.out.println(oak.isBalanced());
-		oak.Add(10);
-		System.out.println(oak.Size());
-		System.out.println(oak.Height());
-		System.out.println(oak.isBalanced());
-		oak.Add(1);
-		System.out.println(oak.Size());
-		System.out.println(oak.Height());
-		System.out.println(oak.isBalanced());
+//		System.out.println(oak.Size());
+//		System.out.println(oak.Height());
+//		System.out.println(oak.isBalanced());
+//		oak.Add(10);
+//		System.out.println(oak.Size());
+//		System.out.println(oak.Height());
+//		System.out.println(oak.isBalanced());
+//		oak.Add(1);
+//		System.out.println(oak.Size());
+//		System.out.println(oak.Height());
+//		System.out.println(oak.isBalanced());
+	
+		Trie autoType = new Trie();
+		autoType.insert("car");
+		autoType.insert("car");
+		autoType.insert("car");
+		autoType.insert("carrot");
+		autoType.insert("cars");
+		autoType.insert("cat");
+		autoType.insert("cat");
+		autoType.insert("cat");
+		autoType.insert("cat");
+		autoType.insert("cats");
+		autoType.insert("catsup");
+		autoType.printWords();
 	}
 	
 }

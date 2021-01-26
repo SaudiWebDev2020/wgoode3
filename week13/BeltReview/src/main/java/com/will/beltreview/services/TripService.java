@@ -3,11 +3,14 @@ package com.will.beltreview.services;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 
 import com.will.beltreview.models.Activity;
+import com.will.beltreview.models.EditTrip;
 import com.will.beltreview.models.Trip;
 import com.will.beltreview.models.User;
 import com.will.beltreview.repositories.ActivityRepository;
@@ -69,6 +72,30 @@ public class TripService {
 		party.remove(u);
 		t.setParty(party);
 		tripRepo.save(t);
+	}
+	
+	public void cancel(Long trip_id, Long user_id) {
+		Trip t = findTrip(trip_id);
+		if(t.getPlanner().getId() == user_id) {
+			// TODO - delete the activities
+//			for(Activity a: t.getItenerary()) {
+//				actRepo.deleteById(a.getId());
+//			}
+			// TODO - delete the party...
+			
+			
+			tripRepo.deleteById(trip_id);
+		}
+	}
+	
+	// TODO - investigate why this is broken
+	@Transactional
+	public void updateTrip(EditTrip t) {
+		Trip toUpdate = tripRepo.findById(t.getId()).orElse(null);
+		toUpdate.setName(t.getName());
+		toUpdate.setStart(t.getStart());
+		toUpdate.setEnd(t.getEnd());
+		tripRepo.save(toUpdate);
 	}
 	
 }
