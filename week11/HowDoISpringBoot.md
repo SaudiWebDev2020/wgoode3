@@ -27,19 +27,19 @@ Last, click `Finish`
 Add these to the `<dependencies></dependencies>` tag in the file and save it
 
 ```xml
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-validation</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<scope>runtime</scope>
-		</dependency>
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-validation</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-data-jpa</artifactId>
+</dependency>
+<dependency>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-java</artifactId>
+    <scope>runtime</scope>
+</dependency>
 <dependency>
     <groupId>org.apache.tomcat.embed</groupId>
     <artifactId>tomcat-embed-jasper</artifactId>
@@ -287,18 +287,18 @@ Inside of `index.jsp` add the following...
 
 ```html
 <ul class="list-group">
-    	<li class="list-group-item">Notes</li>
-    	<c:forEach items="${allNotes}" var="note">
-    		<li class="list-group-item">${note.text}</li>
-    	</c:forEach>
-    	<li class="list-group-item">
-    		<form:form action="/note" method="post" modelAttribute="newNote">
-    			<form:input path="text" placeholder="Your note here..."/>
-    			<form:errors path="text" class="text-danger" />
-    			<input type="submit" value="Add Note" class="btn btn-sm btn-primary" />
-    		</form:form>
-    	</li>
-    </ul>
+  <li class="list-group-item">Notes</li>
+  <c:forEach items="${allNotes}" var="note">
+    <li class="list-group-item">${note.text}</li>
+  </c:forEach>
+  <li class="list-group-item">
+    <form:form action="/note" method="post" modelAttribute="newNote">
+      <form:input path="text" placeholder="Your note here..."/>
+      <form:errors path="text" class="text-danger" />
+      <input type="submit" value="Add Note" class="btn btn-sm btn-primary" />
+    </form:form>
+  </li>
+</ul>
 ```
 
 ### Step 8 - running the server
